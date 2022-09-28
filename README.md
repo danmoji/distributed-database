@@ -9,18 +9,24 @@
 2. Nainštalovať Docker:  https://www.docker.com/
 4. Naklonovať adresár: 
 
-
 ``` shell
   git clone https://github.com/danmoji/distributed-sql.git
+```
+
+``` shell
   git remote set-url origin https://name:password@github.com/repo.git
+```
+
+``` shell
   git switch -c <lokálny názov> origin/development
 ```
 
-
-5. Cez shell:
+5.  premiestniť sa do adresáru a spustiť shell script na spustenie kontajnerov:
+``` shell
+  cd distributed-sql
+```
 
 ``` shell
-  cd distributed-sql/sql-a
-  docker-compose up -d
+  source script.sh
 ```
 
