@@ -1,0 +1,32 @@
+services:
+  db-c:
+    image: mysql:5.7
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: test_db_c
+      MYSQL_TCP_PORT: 3306
+    ports:
+      - "9903:3306"
+  web:
+    image: php:7.4-apache
+    environment:
+      TENANT_ID: ten-c
+    depends_on:
+      - db-c
+    volumes:
+      - ../src/:/var/www/html/
+    ports:
+      - "8103:80"
+  phpmyadmin:
+    image: phpmyadmin:5.2-apache
+    links:
+      - db-c
+    environment:
+      PMA_HOST: db-c
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    restart: always
+    ports:
+      - "8083:80"
