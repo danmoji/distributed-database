@@ -8,6 +8,9 @@
 1. Nainštalovať WSL: https://exotips.com/sk/ako-nainstalovat-wsl-na-windows-10
 2. Nainštalovať Docker:  https://www.docker.com/
 4. Naklonovať adresár: 
+
+git remote set-url origin https://name:password@github.com/repo.git
+
 5. Cez shell:
 
 ``` shell
