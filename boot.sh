@@ -1,3 +1,4 @@
+docker kill $(docker ps -q)
 cd sql-a
 docker-compose up -d
 cd ..

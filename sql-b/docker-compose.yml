@@ -13,6 +13,7 @@ services:
     image: php:7.4-apache
     environment:
       TENANT_ID: ten-b
+      THEME_COLOR: mediumseagreen
     depends_on:
       - db-b
     volumes:
