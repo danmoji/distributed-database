@@ -27,6 +27,6 @@
 ```
 
 ``` shell
-  source script.sh
+  source boot.sh
 ```
 
