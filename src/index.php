@@ -1,5 +1,4 @@
 <html>
-
 <head>
     <title>Hello World</title>
     <link rel="stylesheet" href="style.css">
@@ -7,7 +6,7 @@
         nav {
           background-color: 
             <?php
-                echo $_ENV["THEME_COLOR"];
+                echo $_ENV["HOST_THEME_COLOR"];
             ?>;
         }
     </style>
@@ -17,7 +16,7 @@
     <nav>
         <div class="system-info">
             <?php
-                echo 'My TENANT ID is ' . $_ENV["TENANT_ID"] . '!';
+                echo 'My TENANT ID is ' . $_ENV["HOST_ID"] . '!';
 
                 /*TODO jeden env spoločný kde načítaš všetky systémové premenné a do compose file daj iba unique tenant id */
                 /*TODO SQL connections */
@@ -37,6 +36,13 @@
             </label>
             <button type="submit">Odoslať</button>
         </form>
+        <br>
+        <br>
+        <?php
+            // print "<pre>";
+            // print_r($_ENV);
+            // print "</pre>";
+        ?>
     </main>
 
 </body>

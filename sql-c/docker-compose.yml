@@ -10,10 +10,19 @@ services:
     ports:
       - "9903:3306"
   web:
-    image: php:7.4-apache
+    build: ../Dockerfile
     environment:
-      TENANT_ID: ten-c
-      THEME_COLOR: dodgerblue
+      HOST_ID: ten-id-c
+      HOST_THEME_COLOR: dodgerblue
+      HOST_ADRESS: localhost
+      HOST_PORT: 8103
+      HOST_DB_ADRES: localhost
+      HOST_DB_PORT: 9903
+      HOST_DB_USER: root
+      HOST_DB_PASSWORD: rootpass
+      HOST_DB_NAME: test_db_c
+    env_file:
+      - ../network.env
     depends_on:
       - db-c
     volumes:

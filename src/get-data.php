@@ -1,8 +1,7 @@
 <?php declare(strict_types=1);
 
-//TODO set env variable instead of http://localhost:8101
 if($_SERVER['REQUEST_METHOD'] !== 'POST') {
-  header('Location: ' . 'http://localhost:8101');
+  header('Location: ' . 'http://' . $_ENV['HOST_ADRESS'] . ':' . $_ENV['HOST_PORT']);
   die();
 };
 
@@ -13,3 +12,5 @@ $name = $_POST['name'];
 $mike = new Person($name);
 
 echo 'Hello ' . $mike->getName() . '!';
+
+echo '<br>TESTING DB ' . $mike->dbConnect();

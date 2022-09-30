@@ -1,6 +1,10 @@
 <?php declare(strict_types=1);
 
-class Person {
+//TODO connect to the database
+
+require_once('./Dbh.class.php');
+
+class Person extends Dbh {
    private string $name;
 
    public function __construct(string $name)
@@ -16,5 +20,14 @@ class Person {
    public function setName(string $value)
    {
     $this->name = $value;
+   }
+
+   public function dbConnect() {
+      try {
+         $dbh = new Dbh();
+         return $dbh->connect();
+      } catch(error $e) {
+         return $e;
+      }
    }
 }

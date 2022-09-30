@@ -10,10 +10,19 @@ services:
     ports:
       - "9901:3306"
   web:
-    image: php:7.4-apache
+    build: ../Dockerfile
     environment:
-      TENANT_ID: ten-a
-      THEME_COLOR: orange
+      HOST_ID: ten-id-a
+      HOST_THEME_COLOR: orange
+      HOST_ADRESS: localhost
+      HOST_PORT: 8101
+      HOST_DB_ADRESS: localhost
+      HOST_DB_PORT: 9901
+      HOST_DB_USER: root
+      HOST_DB_PASSWORD: rootpass
+      HOST_DB_NAME: db-a
+    env_file:
+      - ../network.env
     depends_on:
       - db-a
     volumes:
