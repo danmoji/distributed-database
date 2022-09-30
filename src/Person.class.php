@@ -1,7 +1,5 @@
 <?php declare(strict_types=1);
 
-//TODO connect to the database
-
 require_once('./Dbh.class.php');
 
 class Person extends Dbh {
@@ -22,6 +20,7 @@ class Person extends Dbh {
     $this->name = $value;
    }
 
+   //just for db connection testing purpose
    public function dbConnect() {
       try {
          $dbh = new Dbh();

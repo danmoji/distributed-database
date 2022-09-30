@@ -16,7 +16,7 @@ services:
       HOST_THEME_COLOR: dodgerblue
       HOST_ADRESS: localhost
       HOST_PORT: 8103
-      HOST_DB_ADRES: localhost
+      HOST_DB_ADRES: 127.0.0.1
       HOST_DB_PORT: 9903
       HOST_DB_USER: root
       HOST_DB_PASSWORD: rootpass

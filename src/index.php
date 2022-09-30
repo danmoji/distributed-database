@@ -20,7 +20,6 @@
 
                 /*TODO jeden env spoločný kde načítaš všetky systémové premenné a do compose file daj iba unique tenant id */
                 /*TODO SQL connections */
-
                 
             ?>
 

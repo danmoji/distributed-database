@@ -16,7 +16,7 @@ services:
       HOST_THEME_COLOR: mediumseagreen
       HOST_ADRESS: localhost
       HOST_PORT: 8102
-      HOST_DB_ADRESS: localhost
+      HOST_DB_ADRESS: 127.0.0.1
       HOST_DB_PORT: 9902
       HOST_DB_USER: root
       HOST_DB_PASSWORD: rootpass

@@ -13,4 +13,8 @@ $mike = new Person($name);
 
 echo 'Hello ' . $mike->getName() . '!';
 
-echo '<br>TESTING DB ' . $mike->dbConnect();
+echo '<br>TESTING DB ';
+
+print "<pre>";
+print_r($mike->dbConnect());
+print "</pre>";
