@@ -20,11 +20,19 @@ class Person extends Dbh {
     $this->name = $value;
    }
 
-   //just for db connection testing purpose
+   //test db connection
    public function dbConnect() {
       try {
          $dbh = new Dbh();
-         return $dbh->connect();
+         return "connection successful!";
+      } catch(error $e) {
+         return $e;
+      }
+   }
+
+   public static function migrate() {
+      try {
+         return true;
       } catch(error $e) {
          return $e;
       }

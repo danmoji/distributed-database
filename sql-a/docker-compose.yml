@@ -10,9 +10,11 @@ services:
     ports:
       - "9901:3306"
   web:
-    build: ../Dockerfile
+    build: 
+      context: ../
+      dockerfile: Dockerfile
     environment:
-      HOST_ID: ten-id-a
+      HOST_ID: host-a
       HOST_THEME_COLOR: orange
       HOST_ADRESS: localhost
       HOST_PORT: 8101

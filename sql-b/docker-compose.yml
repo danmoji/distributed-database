@@ -10,14 +10,16 @@ services:
     ports:
       - "9902:3306"
   web:
-    build: ../Dockerfile
+    build: 
+      context: ../
+      dockerfile: Dockerfile
     environment:
-      HOST_ID: ten-id-b
+      HOST_ID: host-b
       HOST_THEME_COLOR: mediumseagreen
       HOST_ADRESS: localhost
       HOST_PORT: 8102
-      HOST_DB_ADRESS: 127.0.0.1
-      HOST_DB_PORT: 9902
+      HOST_DB_ADRESS: db-b
+      HOST_DB_PORT: 3306
       HOST_DB_USER: root
       HOST_DB_PASSWORD: rootpass
       HOST_DB_NAME: test_db_b

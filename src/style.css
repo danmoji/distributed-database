@@ -5,11 +5,11 @@
 
 body {
   width: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 nav {
-  width: 100%;
-  height: 30px;
+  padding: 0px 50px;
 }
 main {
   height: 90vh;
@@ -18,21 +18,42 @@ main {
   align-items: center;
   justify-content: center;
 }
-form {
+.main-form {
   background: rgb(0, 255, 140);
   display: flex;
   flex-flow: column nowrap;
   padding: 30px;
 }
 
-form h3 {
+.main-form h3 {
   text-align: center;
 }
 
-form input {
+.main-form input {
   margin: 30px 0;
 }
 
-form button {
+.main-form button {
   margin: 30px 0;
+}
+
+.system-info {
+  color: white;
+  padding: 5px 10px;
+}
+
+ul {
+  list-style-type: none;
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+}
+
+li {
+  display: inline-block;
+  padding: 5px 10px;
+}
+
+nav ul li a {
+  color: #fff;
 }

@@ -2,9 +2,6 @@
 
 class Dbh {
 
-  
-  //TODO add variables from connections.env
-
   private ?string $host;
   private ?string $port;
   private ?string $user;
