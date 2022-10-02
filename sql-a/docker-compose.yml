@@ -14,21 +14,18 @@ services:
       context: ../
       dockerfile: Dockerfile
     environment:
-      HOST_ID: host-a
+      HOST_NAME: sql-a_web_1
       HOST_THEME_COLOR: orange
-      HOST_ADRESS: localhost
-      HOST_PORT: 8101
       HOST_DB_ADRESS: db-a
       HOST_DB_PORT: 3306
       HOST_DB_USER: root
       HOST_DB_PASSWORD: rootpass
       HOST_DB_NAME: test_db_a
-    env_file:
-      - ../network.env
     depends_on:
       - db-a
     volumes:
       - ../src/:/var/www/html/
+    restart: always
     ports:
       - "8101:80"
   phpmyadmin:
