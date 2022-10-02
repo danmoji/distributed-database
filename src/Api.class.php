@@ -30,7 +30,7 @@ class Api {
     
     } catch(Exception $e) {
     
-      trigger_error(sprintf(
+      return trigger_error(sprintf(
           'Curl failed with error #%d: %s',
           $e->getCode(), $e->getMessage()),
           E_USER_ERROR);

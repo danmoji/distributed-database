@@ -28,7 +28,7 @@
     <div class="system-info">
 
       <?php
-      echo $_ENV["HOST_ID"];
+      echo $_ENV["HOST_NAME"];
       ?>
     </div>
     <ul>

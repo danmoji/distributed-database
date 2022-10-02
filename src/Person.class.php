@@ -31,6 +31,7 @@ class Person extends Dbh {
    }
 
    public static function migrate() {
+      //TODO create migration schema for Person table
       try {
          return true;
       } catch(error $e) {
