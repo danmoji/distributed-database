@@ -1,39 +1,22 @@
-<html>
-
-<head>
-    <title>Hello World</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            width: 100%;
-        }
-
-        nav {
-            width: 100%;
-            height: 80px;
-            background-color: 
-            <?php
-                echo $_ENV["THEME_COLOR"];
-            ?>;
-        }
-    </style>
-</head>
-
-<body>
-    <nav>
-        <div class="system-info">
-            <?php
-                echo 'My TENANT ID is ' . $_ENV["TENANT_ID"] . '!';
-
-                /*TODO spravit jeden env spoločný kde načítaš všetky systémové premenné a do compose file daj iba unique tenant id */
-            ?>
-        </div>
-    </nav>
-
-</body>
-
-</html>
+<?php declare(strict_types=1);
+include_once("header.php");
+?>
+    <main>
+        <form class="main-form" action="get-data.php" method="post">
+            <h3>Formulár</h3>
+            <label for="name">
+                Meno
+                <input type="text" name="name" id="name">
+            </label>
+            <button type="submit">Odoslať</button>
+        </form>
+        <br>
+        <br>
+        <?php
+        // print "<pre>";
+        // print_r($_ENV);
+        // print "</pre>";
+        ?>
+    </main>
+<?php
+include_once("footer.php");
