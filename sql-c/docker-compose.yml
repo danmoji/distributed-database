@@ -21,6 +21,9 @@ services:
       HOST_DB_USER: root
       HOST_DB_PASSWORD: rootpass
       HOST_DB_NAME: test_db_c
+      HOST_ADRESS: localhost
+      HOST_PORT: 8103
+      HOST_PMA_PORT: 8083
     depends_on:
       - db-c
     volumes:
