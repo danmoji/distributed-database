@@ -35,9 +35,15 @@
       <!-- TODO link with DB connection check -->
       <!-- TODO JS async function that chcekc connection to other nodes -->
       <!-- TODO status bar with connection check to other nodes -->
+
       <div>
         <li><a href="/">Domov</a></li>
         <li><a href="info.php">Info</a></li>
+        <?php 
+        $pmaLink = 'http://' . $_ENV["HOST_ADRESS"] . ':' . $_ENV["HOST_PMA_PORT"];
+        echo  "<li><a href=$pmaLink target='none'>PhpMyAdmin</a></li>";
+
+      ?>
       </div>
       <div>
         <li>
