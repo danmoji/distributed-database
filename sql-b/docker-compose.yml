@@ -21,6 +21,9 @@ services:
       HOST_DB_USER: root
       HOST_DB_PASSWORD: rootpass
       HOST_DB_NAME: test_db_b
+      HOST_ADRESS: localhost
+      HOST_PORT: 8102
+      HOST_PMA_PORT: 8082
     depends_on:
       - db-b
     volumes:
