@@ -20,6 +20,44 @@
         ?>
     }
   </style>
+  <script type="module">
+    import api from "./api.js"
+
+    const migratePersonForm = document.getElementById("migrate-person")
+    const migrateAllPersonForm = document.getElementById("migrate-all-person")
+
+    migratePersonForm.addEventListener('submit', (e) => {
+      const form = e.target
+      e.preventDefault()
+
+      handleMigration(form.action)
+    });
+
+    migrateAllPersonForm.addEventListener('submit', (e) => {
+      const form = e.target
+      e.preventDefault()
+      //TODO funkcis na migraciu všetkých uzlov
+      //Vytiahne z nejakej konfigurácie (cez php) do pola adresy všetkých uzlov
+      //precyklí sa cez ne a následne odošle požiadavku na všetky uzly
+      //promise response bude tiež pole s odpoveďami o tom či ostatné uzly dostali požiadavku
+      //požiadavka - ukladanie neúspešných migrácií do queue nebude prítomná
+      return false
+    })
+
+    async function handleMigration(url) {
+
+      if (!confirm('Po stlačení tlačidla OK sa zmigruje databáza na hostiteľskom uzli.')) return false
+      try {
+        //TODO dorobiť volanie na /migrate-script.php
+        const response = await api.get(url)
+        alert(response)
+      } catch (e) {
+        alert(e)
+      }
+
+    }
+
+  </script>
 </head>
 
 <body>
@@ -37,6 +75,7 @@
       <!-- TODO status bar with connection check to other nodes -->
 
       <div>
+        <!-- TODO dropdown with liks to other nodes -->
         <li><a href="/">Domov</a></li>
         <li><a href="info.php">Info</a></li>
         <?php 
@@ -47,17 +86,15 @@
       </div>
       <div>
         <li>
-          <form action="migrate-person.php" method="post">
-            <!-- JS popup/modal with confirmation messge -->
+          <form id="migrate-person-form" action="migrate-person.php" method="post">
             <button type="submit">Migrate host</button>
           </form>
         </li>
         <li>
-          <form action="migrate-all-person.php" method="post">
-            <!-- JS popup/modal with confirmation messge -->
+          <form id="migrate-all-person-form" action="migrate-all-person.php" method="post">
             <button type="submit">Migrate all nodes</button>
           </form>
-      </li>
+        </li>
       </div>
     </ul>
   </nav>
