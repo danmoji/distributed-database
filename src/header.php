@@ -23,8 +23,8 @@
   <script type="module">
     import api from "./api.js"
 
-    const migratePersonForm = document.getElementById("migrate-person")
-    const migrateAllPersonForm = document.getElementById("migrate-all-person")
+    const migratePersonForm = document.getElementById("migrate-person-form")
+    const migrateAllPersonForm = document.getElementById("migrate-all-person-form")
 
     migratePersonForm.addEventListener('submit', (e) => {
       const form = e.target
@@ -49,7 +49,7 @@
       if (!confirm('Po stlačení tlačidla OK sa zmigruje databáza na hostiteľskom uzli.')) return false
       try {
         //TODO dorobiť volanie na /migrate-script.php
-        const response = await api.get(url)
+        const response = await api.post(url, '')
         alert(response)
       } catch (e) {
         alert(e)

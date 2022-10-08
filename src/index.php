@@ -12,11 +12,7 @@ include_once("header.php");
         </form>
         <br>
         <br>
-        <?php
-        // print "<pre>";
-        // print_r($_ENV);
-        // print "</pre>";
-        ?>
+        <h1>List of all users here</h1>
     </main>
 <?php
 include_once("footer.php");
