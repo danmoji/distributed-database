@@ -12,11 +12,11 @@ nav {
   padding: 0px 50px;
 }
 main {
-  height: 90vh;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-flow: column nowrap;
 }
 .main-form {
   background: rgb(0, 255, 140);

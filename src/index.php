@@ -24,7 +24,6 @@
 
 <body>
   <nav>
-    <!-- TODO drop down list with links to other hosts -->
     <div class="system-info">
 
       <?php
@@ -47,10 +46,10 @@
           </form>
         </li>
         <li>
-          <form action="script.php" method="get">
-          <button type="submit">Ping nodes</button>
-        </form>
-      </li>
+          <form id="migrate-queue-form" action="migrate-queue.php" method="post">
+            <button type="submit">Migrate Queue</button>
+          </form>
+        </li>
       </div>
     </ul>
   </nav>
@@ -59,7 +58,7 @@
       <h3>Formulár</h3>
       <label for="name">
         Meno
-        <input type="text" name="name" id="name">
+        <input type="text" name="personal_information" id="personal_information">
       </label>
       <button type="submit">Odoslať</button>
     </form>
@@ -67,7 +66,7 @@
       <thead>
         <th>id</th>
         <th>info</th>
-        <th>creator_nodes_name</th>
+        <th>creator_node_name</th>
 
       </thead>
       <tbody>
@@ -78,14 +77,9 @@
         $stmt = pdo()->query($sql);
         while ($row = $stmt->fetch()) {
           echo '<tr>';
-          echo '<td>' . $row['person_id'] . '</td>' . '<td>' . $row['personal_information'] . '</td>' . '<td>' . $row['creator_nodes_name'] . '</td>';
+          echo '<td>' . $row['person_id'] . '</td>' . '<td>' . $row['personal_information'] . '</td>' . '<td>' . $row['creator_node_name'] . '</td>';
           echo '</tr>';
-          echo  "<br />\n";
         };
-
-        // $stmt = $pdo->query("SELECT * FROM users");
-        // while ($row = $stmt->fetch()) {
-        // echo $row['name']."<br />\n";
         ?>
       </tbody>
     </table>
