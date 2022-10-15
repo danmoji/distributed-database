@@ -20,7 +20,7 @@ if (isset($_POST['sync_stage'])) die('OK ' .  $_ENV["HOST_NAME"]);
 
 
 foreach ($nodes as $nodeAdress) {
-  if ($_ENV['HOST_NAME'] === $nodeAdress) break;
+  if ($_ENV['HOST_NAME'] === $nodeAdress) continue;
 
   $sql = "INSERT into queue (personal_information, creator_node_name, creator_node_key, node_adress) VALUES (?, ?, ?, ?)";
   $stmt = pdo()->prepare($sql);
@@ -29,14 +29,14 @@ foreach ($nodes as $nodeAdress) {
 
 //3 take all the queue and send all data to other nodes
 foreach ($nodes as $nodeAdress) {
-  if ($_ENV['HOST_NAME'] === $nodeAdress) break;
+  if ($_ENV['HOST_NAME'] === $nodeAdress) continue;
 
   $sql = "SELECT * FROM queue WHERE node_adress=?";
   $stmt = pdo()->prepare($sql);
   $stmt->execute([$nodeAdress]);
   $data = $stmt->fetchAll();
 
-  if (!$data) break;
+  if (!$data) continue;
 
   foreach ($data as $row) {
     //destructure row and only take what you need
@@ -49,7 +49,7 @@ foreach ($nodes as $nodeAdress) {
 
     $url = "http://" . $nodeAdress . "/save-data.php";
     $response = Api::post($url, $payload);
-    if (!$response) break 2;
+    if (!$response) break;
 
     //TODO rewrite this
     $sql = "DELETE FROM queue WHERE creator_node_key=? AND node_adress=?";
