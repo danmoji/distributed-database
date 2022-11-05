@@ -1,15 +1,15 @@
-<?php declare(strict_types=1);
+<?php 
+
+declare(strict_types=1);
 
 class Api {
   public static function post(string $url, array $post) {
       $ch = curl_init();
       curl_setopt($ch, CURLOPT_URL, $url);
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-      // curl_setopt($ch,CURLOPT_POST, true);
-      // curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+      curl_setopt($ch,CURLOPT_POST, true);
       curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
       $response = curl_exec($ch);
-      
       $retcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
       curl_close($ch);
       if (200==$retcode) {
@@ -23,7 +23,6 @@ class Api {
       $ch = curl_init();
       curl_setopt($ch, CURLOPT_URL, $url);
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-      // curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
       $response = curl_exec($ch);
       $retcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
       curl_close($ch);
