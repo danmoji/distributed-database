@@ -3,3 +3,4 @@ RUN docker-php-ext-install pdo pdo_mysql mysqli
 RUN docker-php-ext-enable mysqli
 RUN apt-get update && apt-get install libcurl4-openssl-dev
 RUN docker-php-ext-install curl
+RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"

@@ -14,7 +14,7 @@ services:
       context: ../
       dockerfile: Dockerfile
     environment:
-      HOST_NAME: sql-c-web-1
+      HOST_NAME: sql-c_web_1
       HOST_THEME_COLOR: dodgerblue
       HOST_DB_ADRESS: db-c
       HOST_DB_PORT: 3306
