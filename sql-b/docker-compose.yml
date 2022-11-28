@@ -28,6 +28,7 @@ services:
       - db-b
     volumes:
       - ../src/:/var/www/html/
+      - ../conf.d/:/usr/local/etc/php/conf.d/
     restart: always
     ports:
       - "8102:80"
