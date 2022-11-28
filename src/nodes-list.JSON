@@ -1,3 +1,3 @@
 {
-  "nodes": ["sql-a_web_1","sql-b_web_1", "sql-c_web_1", "sql-d_web_1"]
+  "nodes": ["sql-a_web_1","sql-b_web_1", "sql-c_web_1"]
 }

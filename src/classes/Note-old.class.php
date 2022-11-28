@@ -36,7 +36,7 @@ class Note extends Dbh
 
   public function update(string $noteTitle, string $noteDescription, string $creatorNodeKey)
   {
-    $sql = "UPDATE note SET note=?, description=? WHERE creator_node_key=?";
+    $sql = "UPDATE note SET note_title=?, note_description=? WHERE creator_node_key=?";
     $stmt = $this->dbh->prepare($sql);
     $stmt->execute([$noteTitle, $noteDescription, $creatorNodeKey]);
   }
