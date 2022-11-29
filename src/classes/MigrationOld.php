@@ -13,6 +13,7 @@ class Migration extends Model {
     // private string $tableName;
     // private string $mainIdColumnName;
     // private string $updatableColumnsString;
+
   }
 
   public function migrate() {

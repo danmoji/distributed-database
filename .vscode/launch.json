@@ -9,10 +9,10 @@
       "type": "php",
       "request": "launch",
       "port": 9003,
-      "stopOnEntry": true,
+      "stopOnEntry": false,
       "pathMappings": {
-        "/var/www/html": "${workspaceFolder}/src",
-        "/app": "${workspaceFolder}/src"
+        "/var/www/html": "${workspaceFolder}",
+        "/app": "${workspaceFolder}"
       }
     },
     {

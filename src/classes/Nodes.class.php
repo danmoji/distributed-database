@@ -7,9 +7,10 @@ class Nodes {
 
   public function __construct()
   {
-    $this->nodes = json_decode(file_get_contents('../nodes-list.JSON'), true)['nodes'];
+    $this->loadedNodesJSON = file_get_contents('../nodes-list.JSON');
+    $this->nodes = json_decode($this->loadedNodesJSON, true)['nodes'];
     $this->hostNode = $_ENV['HOST_NAME'];
-    $this->filteredNodeAdresses = $this->filterAdresses();
+    $this->filteredNodes = $this->filterAdresses();
   }
 
   private function filterAdresses(): array {

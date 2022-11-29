@@ -13,10 +13,23 @@ class Model extends Dbh {
     $this->tableName = $modelSetup['table_name'];
   }
 
+  protected function handleDb($stmt) {
+    try {
+      $stmt;
+    }catch(Exception $e) {
+      echo '<pre>';
+      print_r($e);
+      echo '</pre>';
+    }
+  }
+
   protected function insert(array $dataToInsert):void {
     $sql = "INSERT INTO " . $this->tableName . " " . $this->allColumnNames . " VALUES " . $this->preparedStmtBuffer;
-    $stmt = $this->dbh->prepare($sql);
-    $stmt->execute($dataToInsert);
+    $this->handleDb(
+      $stmt = $this->dbh->prepare($sql),
+      $result = $stmt->execute($dataToInsert)
+    );
+    return $result;
   }
 
   protected function selectByMainId(string $id): array {
@@ -58,5 +71,16 @@ class Model extends Dbh {
     $sql = "DELETE FROM " . $this->tableName . " WHERE " . $this->mainIdColumnName . "=?";
     $stmt = $this->dbh->prepare($sql);
     $stmt->execute([$id]);
+  }
+
+  public function migrate() {
+    $sql = 'DEROP TALBE IF EXISTS ' . $this->tableName . ';' .
+    'CREATE TABLE ' . $this->tableName . '(' .
+    $this->allColumnNames; 
+    'created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ,' .
+    'updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,' .
+    'PRIMARY KEY(' . $this->primaryKey . ')' .
+    ');';
+    $this->dbh->exec($sql);
   }
 }
