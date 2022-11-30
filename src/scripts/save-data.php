@@ -16,12 +16,10 @@ $method = $_POST['method'];
 
 if ($method === "save") {
   $note->saveNote();
-} else if ($method === "update") {
+} else if ($method === "edit") {
   $note->updateNote();
 } else if($method === "delete") {
   $note->deleteNote();
-} else {
-  throw new Exception('Undefined method given!');
 }
 
 $noteData = $note->getNoteData();

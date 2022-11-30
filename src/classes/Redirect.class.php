@@ -1,9 +1,7 @@
-<?php
+<?php declare(strict_types=1);
 
-declare(strict_types=1);
 
-class Redirect
-{
+class Redirect {
 
   private string $hostAdress;
   private string $hostPort;
@@ -13,8 +11,7 @@ class Redirect
     $this->hostPort =  $_ENV["HOST_PORT"];
   }
 
-  public function homeAndDie()
-  {
+  public function homeAndDie(){
     header("Location: http://" . $this->hostAdress . ':' . $this->hostPort);
     die();
   }
