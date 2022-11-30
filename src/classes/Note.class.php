@@ -9,15 +9,11 @@ class Note extends Dbh
 {
   private PDO $dbh;
   private HandleException $handleException;
-  private string $noteTitle;
-  private string $noteDescription;
-  private string $noteHashKey;
-  private string $creatorNodeName;
-  private string $method;
+  private array $noteData; //TODO this does not exist
 
-  public function __construct(array $post = null)
+
+  public function __construct()
   {
-    $this->construcNoteFromPostParams($post);
     $this->dbh = (new Dbh())->connect();
     $this->handleException = new HandleException();
   }
@@ -36,13 +32,11 @@ class Note extends Dbh
 
   public function saveNote(): mixed
   {
-    $noteData = $this->getNoteData();
-    unset($noteData['method']);
-    $noteDataValues = array_values($noteData);
+    $noteData = $this->getNoteData;
     $sql = "INSERT INTO note (note_title, note_description, note_hash_key, creator_node_name) VALUES (?, ?, ?, ?)";
     try {
       $stmt = $this->dbh->prepare($sql);
-      $result = $stmt->execute($noteDataValues);
+      $result = $stmt->execute($noteData);
     } catch (Exception $e) {
       $this->handleException->formatAndPrint($e);
     }
@@ -73,32 +67,6 @@ class Note extends Dbh
     return $result;
   }
 
-  private function construcNoteFromPostParams(array|null $post):void
-  {
-    if ($post !== null) {
-      $this->noteTitle = $post['note_title'];
-      $this->noteDescription = $post['note_description'];
-      $this->noteHashKey = isset($post['note_hash_key']) ? $post['note_hash_key'] : $this->createRandomHashKey();
-      $this->creatorNodeName = $_ENV['HOST_NAME'];
-      $this->method = $post['method'];
-    }
-  }
-
-  public function getNoteData(): array
-  {
-    return [
-      'note_title' => $this->noteTitle,
-      'note_description' => $this->noteDescription,
-      'note_hash_key' => $this->noteHashKey,
-      'creator_node_name' => $this->creatorNodeName,
-      'method' => $this->method
-    ];
-  }
-
-  private function createRandomHashKey(): string
-  {
-    return substr(md5(openssl_random_pseudo_bytes(20)), -32);
-  }
 
   public function migrate()
   {
