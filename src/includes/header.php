@@ -10,10 +10,12 @@
         echo $_ENV["HOST_THEME_COLOR"];
         ?>;
     }
+
     nav ul li .btn {
       background-color: transparent !important;
       text-decoration: none;
     }
+
     nav ul li .btn:hover {
       text-decoration: underline;
     }
@@ -49,4 +51,4 @@
       </ul>
     </nav>
   </header>
-<main>
+  <main>

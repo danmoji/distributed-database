@@ -8,7 +8,7 @@ require_once("HandleException.class.php");
 class Queue extends Dbh {
 
   private Nodes $nodes;
-  private Pdo $dbh;
+  private PDO $dbh;
   private array $filteredNodeAdresses;
   
   public function __construct() {
@@ -42,7 +42,6 @@ class Queue extends Dbh {
   public function selectAllUnsyncedQueriesOfOneDistatnNode(string $nodeAdress):array {
       $sql = "SELECT * FROM queue WHERE distant_node_adress=? ORDER BY queue_id DESC";
       try {
-        //TODO check if this works
         $stmt = $this->dbh->prepare($sql);
         $stmt->execute([$nodeAdress]);
         $data = $stmt->fetchAll();
