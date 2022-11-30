@@ -7,6 +7,7 @@
   <div class="form-floating mb-3">
     <textarea required style="height: 200px; width: 500px;" class="form-control" placeholder="Write your note description here." id="note_description" name="note_description"></textarea>
     <label for="note_description">Note Description</label>
+    <input type="text" name="method" hidden value="save">
   </div>
   <button type="submit" class="btn btn-primary">Save</button>
 </form>

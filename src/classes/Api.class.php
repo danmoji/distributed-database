@@ -11,8 +11,6 @@ class Api {
       curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
       $response = curl_exec($ch);
       $retcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
-
       curl_close($ch);
       if (200==$retcode) {
           return $response;

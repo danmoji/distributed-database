@@ -1,9 +1,14 @@
 <?php
 
+use LDAP\Result;
+
 require_once("../classes/Queue.class.php");
+require_once("../classes/Redirect.class.php");
 
 $queue = new Queue();
 $queue->migrate();
 
-header("Location: http://" . $_ENV["HOST_ADRESS"] . ':' . $_ENV["HOST_PORT"]);
-die();
+
+$redirect = new Redirect();
+
+$redirect->homeAndDie();
