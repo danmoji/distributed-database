@@ -1,5 +1,5 @@
 <form class="flex p-5 border" action="scripts/save-data.php" method="post">
-  <h3>Create Note</h3>
+  <h1>Create Note</h1>
   <div class="form-floating">
     <input required style="width: 500px;" type="text" name="note_title" id="note_title" class="form-control mb-3" placeholder="Todo: clean up the room.">
     <label for="note_title">Note title</label>
