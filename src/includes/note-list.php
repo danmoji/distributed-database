@@ -2,11 +2,9 @@
   
   <div class="border bg-light" style="height: 100%; max-height: 80vh; overflow-y: scroll">
   <?php
-  include_once 'classes/Note.class.php';
-  $note = new Note();
-  $notes = $note->fetchAllNotesFromDb(); 
-
-
+  require_once 'classes/NoteController.class.php';
+  $noteController = new NoteController();
+  $notes = $noteController->fetchAllNotes(); 
 
   foreach ($notes as $note) { 
     $noteTitle =  $note['note_title'];

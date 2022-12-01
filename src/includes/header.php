@@ -21,6 +21,23 @@
     }
   </style>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script>
+    //TODO get checkbox element by id
+    //TODO get form element by id
+    //TODO add event listener on checkbox
+    //TODO if checkbox is checked fire a submit on form element
+    //document.getElementById("myForm").submit();
+
+    /*
+    function doalert(checkboxElem) {
+      if (checkboxElem.checked) {
+        alert ("hi");
+      } else {
+        alert ("bye");
+      }
+    }
+    */
+  </script>
 </head>
 
 <body>
@@ -47,6 +64,15 @@
           <form id="migrate-queue-form" action="scripts/migrate-queue.php" method="post">
             <button class="btn btn-link text-light mx-2" type="submit">Migrate Queue</button>
           </form>
+        </li>
+        <li>
+          <div class="form-check form-switch">
+            <form action="scripts/switch-connection.php">
+              <!-- TODO check if value checked false makes false -->
+              <!-- TODO echo the checked value based on ENV variable connection -->
+              <input class="form-check-input bg-danger py-1" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked="false">
+            </form>
+          </div>
         </li>
       </ul>
     </nav>

@@ -2,31 +2,32 @@
 
 declare(strict_types=1);
 
-require_once '../classes/Note.class.php';
-require_once '../classes/Queue.class.php';
-require_once '../classes/Api.class.php';
-require_once '../classes/Nodes.class.php';
-require_once '../classes/SyncData.class.php';
+require_once '../classes/NoteController.class.php';
+require_once '../classes/QueueController.class.php';
+require_once '../classes/SyncDataController.class.php';
 require_once '../classes/Redirect.class.php';
 
-$note = new Note($_POST);
-$queue = new Queue();
-$syncData = new SyncData();
+
 $method = $_POST['method'];
+$noteController = new NoteController($_POST);
+$queueController = new QueueController();
+$syncDataController = new SyncDataController();
 
 if ($method === "save") {
-  $note->saveNote();
+  $noteController->saveNote();
 } else if ($method === "update") {
-  $note->updateNote();
+  $noteController->updateNote();
 } else if ($method === "delete") {
-  $note->deleteNote();
+  $noteController->deleteNote();
 } else {
-  throw new Exception('Undefined method given!');
+  throw new Exception('Undefined method given: ' . $method);
 }
 
-$noteData = $note->getNoteData();
-$queue->saveUnsyncedNote($noteData);
-$syncData->syncAll();
+$noteData = $noteController->getCurrentNoteData();
+$queueController->saveUnsyncedNote($noteData);
+$dataToSync = $queueController->fetchAllNotes();
+$syncedNotes = $syncDataController->syncAllNotes($dataToSync);
+$queueController->deleteAllSyncedNotes($syncedNotes);
 
 $redirect = new Redirect();
 $redirect->homeAndDie();

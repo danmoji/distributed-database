@@ -1,30 +1,85 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 require_once('Dbh.class.php');
 require_once('HandleException.class.php');
-
 class Note extends Dbh
 {
   private PDO $dbh;
   private HandleException $handleException;
-  private string $noteTitle;
-  private string $noteDescription;
-  private string $noteHashKey;
-  private string $creatorNodeName;
-  private string $method;
 
-  public function __construct(array $post = null)
+  private string $noteMigration =
+  '
+  DROP TABLE IF EXISTS note;
+  CREATE TABLE note(
+     note_id INT AUTO_INCREMENT,
+     note_title LONGTEXT NOT NULL, 
+     note_description LONGTEXT NOT NULL, 
+     note_hash_key VARCHAR(100) NOT NULL,
+     creator_node_name VARCHAR(100) NOT NULL,
+     is_deleted VARCHAR(100) NOT NULL,
+     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ,
+     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+     PRIMARY KEY(note_id)
+   );';
+
+  protected function __construct()
   {
-    $this->construcNoteFromPostParams($post);
     $this->dbh = (new Dbh())->connect();
     $this->handleException = new HandleException();
   }
 
-  public function fetchAllNotesFromDb(): array
+  protected function save(array $dataToSave): bool
   {
-    $sql = "SELECT * FROM note";
+    $sql = "INSERT INTO note (note_title, note_description, note_hash_key, creator_node_name, is_deleted) VALUES (?, ?, ?, ?, ?)";
+    try {
+      $stmt = $this->dbh->prepare($sql);
+      $result = $stmt->execute($dataToSave);
+    } catch (Exception $e) {
+      $this->handleException->formatAndPrint($e);
+    }
+    return $result;
+  }
+
+  protected function update(array $dataToUpdate): bool
+  {
+    $sql = "UPDATE note SET note_title=?, note_description=? WHERE note_hash_key=?";
+    try {
+      $stmt = $this->dbh->prepare($sql);
+      $result = $stmt->execute($dataToUpdate);
+    } catch (Exception $e) {
+      $this->handleException->formatAndPrint($e);
+    }
+    return $result;
+  }
+
+  protected function delete(array $dataToDelete): bool
+  {
+    $sql = "UPDATE note SET is_deleted=? WHERE note_hash_key=?";
+    try {
+      $stmt = $this->dbh->prepare($sql);
+      $result = $stmt->execute($dataToDelete);
+    } catch (Exception $e) {
+      $this->handleException->formatAndPrint($e);
+    }
+    return $result;
+  }
+
+  protected function selectOne(array $noteHashKey): array
+  {
+    $sql = "SELECT * FROM note WHERE note_hash_key=? LIMIT 1";
+    try {
+      $stmt = $this->dbh->prepare($sql);
+      $stmt->execute($noteHashKey);
+      $result = $stmt->fetch();
+    } catch (Exception $e) {
+      $this->handleException->formatAndPrint($e);
+    }
+    return $result;
+  }
+
+  protected function selectAll(): array
+  {
+    $sql = "SELECT * FROM note WHERE is_deleted='false'";
     try {
       $stmt = $this->dbh->query($sql);
       $result = $stmt->fetchAll();
@@ -34,87 +89,9 @@ class Note extends Dbh
     return $result;
   }
 
-  public function saveNote(): mixed
+  protected function migrate(): void
   {
-    $noteData = $this->getNoteData();
-    unset($noteData['method']);
-    $noteDataValues = array_values($noteData);
-    $sql = "INSERT INTO note (note_title, note_description, note_hash_key, creator_node_name) VALUES (?, ?, ?, ?)";
-    try {
-      $stmt = $this->dbh->prepare($sql);
-      $result = $stmt->execute($noteDataValues);
-    } catch (Exception $e) {
-      $this->handleException->formatAndPrint($e);
-    }
-    return $result;
-  }
-
-  public function deleteNote(): mixed
-  {
-    $sql = "DELETE FROM note WHERE note_hash_key=?";
-    try {
-      $stmt = $this->dbh->prepare($sql);
-      $result = $stmt->execute([$this->noteHashKey]);
-    } catch (Exception $e) {
-      $this->handleException->formatAndPrint($e);
-    }
-    return $result;
-  }
-
-  public function updateNote(): mixed
-  {
-    $sql = "UPDATE note SET note_title=?, note_description=? WHERE note_hash_key=?";
-    try {
-      $stmt = $this->dbh->prepare($sql);
-      $result = $stmt->execute([$this->noteTitle, $this->noteDescription, $this->noteHashKey]);
-    } catch (Exception $e) {
-      $this->handleException->formatAndPrint($e);
-    }
-    return $result;
-  }
-
-  private function construcNoteFromPostParams(array|null $post):void
-  {
-    if ($post !== null) {
-      $this->noteTitle = $post['note_title'];
-      $this->noteDescription = $post['note_description'];
-      $this->noteHashKey = isset($post['note_hash_key']) ? $post['note_hash_key'] : $this->createRandomHashKey();
-      $this->creatorNodeName = $_ENV['HOST_NAME'];
-      $this->method = $post['method'];
-    }
-  }
-
-  public function getNoteData(): array
-  {
-    return [
-      'note_title' => $this->noteTitle,
-      'note_description' => $this->noteDescription,
-      'note_hash_key' => $this->noteHashKey,
-      'creator_node_name' => $this->creatorNodeName,
-      'method' => $this->method
-    ];
-  }
-
-  private function createRandomHashKey(): string
-  {
-    return substr(md5(openssl_random_pseudo_bytes(20)), -32);
-  }
-
-  public function migrate()
-  {
-    $sql =
-      '
-      DROP TABLE IF EXISTS note;
-      CREATE TABLE note(
-         note_id INT AUTO_INCREMENT,
-         note_title LONGTEXT NOT NULL, 
-         note_description LONGTEXT NOT NULL, 
-         creator_node_name VARCHAR(100) NOT NULL,
-         note_hash_key VARCHAR(100) NOT NULL,
-         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ,
-         updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-         PRIMARY KEY(note_id)
-       );';
+    $sql = $this->noteMigration;
     try {
       $this->dbh->exec($sql);
     } catch (Exception $e) {

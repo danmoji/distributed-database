@@ -1,5 +1,5 @@
 cd sql-a
-docker compose run phpunit --colors
+docker compose run --rm phpunit --colors
 cd ..
 # cd sql-b
 # docker compose run phpunit

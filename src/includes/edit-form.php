@@ -16,7 +16,7 @@ $noteHashKey = $_POST['note_hash_key'];
   <div class="form-floating mb-3">
     <textarea required style="height: 200px; width: 500px;" class="form-control" placeholder="Write your note description here." id="note_description" name="note_description"><?php echo $noteDescription ?></textarea>
     <label for="note_description">Note Description</label>
-    <input type="text" name="method" hidden value="edit">
+    <input type="text" name="method" hidden value="update">
     <input type="text" name="note_hash_key" hidden value="<?php echo $noteHashKey ?>">
   </div>
   <button type="submit" class="btn btn-primary">Save</button>

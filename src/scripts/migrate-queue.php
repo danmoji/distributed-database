@@ -1,14 +1,10 @@
 <?php
 
-use LDAP\Result;
-
-require_once("../classes/Queue.class.php");
+require_once("../classes/QueueController.class.php");
 require_once("../classes/Redirect.class.php");
 
-$queue = new Queue();
-$queue->migrate();
-
+$queueController = new QueueController();
+$queueController->migrateQueue();
 
 $redirect = new Redirect();
-
 $redirect->homeAndDie();

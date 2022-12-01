@@ -1,10 +1,11 @@
 <?php
 
-require_once("../classes/Note.class.php");
+require_once("../classes/NoteController.class.php");
 require_once("../classes/Redirect.class.php");
 
-$note  = new Note();
-$note->migrate();
+$noteController = new NoteController();
+$noteController->migrateNote();
 
 $redirect = new Redirect();
 $redirect->homeAndDie();
+ 
