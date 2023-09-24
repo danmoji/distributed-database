@@ -9,10 +9,6 @@
 ```
 
 ``` shell
-  git switch -c <lokálny názov> origin/development
-```
-
-``` shell
   cd distributed-sql
 ```
 
